@@ -1,2 +1,2 @@
 # full_stack
-School work: Exercise submissions for fullstackopen (2022).
+School work: Exercise submissions for Full Stack Open 2022.
