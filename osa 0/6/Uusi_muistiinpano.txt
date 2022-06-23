@@ -1,0 +1,17 @@
+note over selain:
+Käyttäjä kirjoittaa tekstin lomakkeeseen
+ja painaa "Save"-nappia.
+end note
+note over selain:
+spa.js-skripti lisää lomakkeen sisällön
+elementiksi notes-taulukkoon ja
+piirtää sen perusteella listan uudelleen
+sivulle. Sitten se lähettää lomakkeen
+sisällön palvelimelle:
+end note
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp//new_note_spa
+palvelin-->selain: {"message":"note created"} (status-koodi 201)
+note over selain:
+Palvelimen palauttama viesti tulostelaan
+lokiin.
+end note

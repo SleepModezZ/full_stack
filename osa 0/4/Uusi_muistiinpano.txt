@@ -1,0 +1,26 @@
+note over selain:
+Käyttäjä kirjoittaa tekstin lomakkeeseen
+ja painaa "Save"-nappia.
+end note
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+note over palvelin:
+Post/Redirect/Get-käytännön mukaisesti
+palvelin vastaa POST-pyyntöön
+uudelleenohjaamalla selain "notes" sivulle
+end note
+palvelin-->selain: 302 status-koodi (uudelleenohjaus)
+selain-->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+palvelin-->selain: HTML-koodi
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+palvelin-->selain: main.css
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+palvelin-->selain: main.js
+
+
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+palvelin-->selain: [{content": "test", "date": "2022-06-06T08:32:11.599Z" }, ...]
+
+note over selain:
+selain suorittaa tapahtumankäsittelijän
+joka renderöi muistiinpanot näytölle
+end note
