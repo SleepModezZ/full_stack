@@ -99,7 +99,11 @@ const App = () => {
         setError(false)
         setMessage(`Added ${newName} to phonebook`)
         setTimeout(() => {setMessage(null)}, 5000)
-      })
+      }).catch(error => {
+        setError(true)
+        setMessage(error.response.data.error)
+        setTimeout(() => {setMessage(null)}, 5000)
+    })
 
     }
     // Jos henkilö jo löytyy luettelosta:
@@ -118,9 +122,14 @@ const App = () => {
       })
       .catch(error => {
         setError(true)
-        setMessage(`Information of '${newName}' has already been removed from server`)
+        setMessage(error.response.data.error)
         setTimeout(() => {setMessage(null)}, 5000)
-        setPersons(persons.filter(person => person.id !== id))
+
+        // Poistaa henkilön listasta, mikäli virhe viittaa siihen, että
+        // henkilö on jo poistettu puhelinluettelosta:
+        if (error.response.status == 404) {
+          setPersons(persons.filter(person => person.id !== id))
+        }
       })
     }
     }
