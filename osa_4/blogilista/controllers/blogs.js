@@ -1,7 +1,5 @@
 const blogsRouter = require('express').Router()
-const jwt = require('jsonwebtoken')
 const Blog = require('../models/blog')
-const User = require('../models/user')
 const middleware = require('../utils/middleware')
 
 
@@ -63,7 +61,7 @@ blogsRouter.put('/:id', middleware.userExtractor, async (request, response, next
   const body = request.body
   const user = request.user
   const blog = await Blog.findById(request.params.id)
-  if (user.id != blog.user.toString()) {
+  if (user.id !== blog.user.toString()) {
     return response.status(403).json({ error: 'user does not have permission to update the resource' })
   }
 

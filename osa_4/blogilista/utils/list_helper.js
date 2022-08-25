@@ -1,9 +1,9 @@
-const dummy = (blogs) => {
+const dummy = () => {
   return 1
 }
 
 const totalLikes = (blogs) => {
-  return likes = blogs.reduce((sum, blog) => sum + blog.likes, 0)
+  return blogs.reduce((sum, blog) => sum + blog.likes, 0)
 }
 
 const favoriteBlog = (blogs) => {
@@ -14,7 +14,7 @@ const favoriteBlog = (blogs) => {
 
   const favorite = blogs.reduce((prev, blog) => blog.likes > prev.likes ? blog : prev, blogs[0])
 
-  const { _id, url, __v, ...result } = favorite
+  const { _id, url, __v, ...result } = favorite //linteri herjaa, en välitä
   return result
 }
 
@@ -32,7 +32,7 @@ const mostBlogs = (blogs) => {
   // funktiosta jo sen verran monimutkaisen, että reducen käyttö ei ole mielestäni perusteltua.
   // Sama koskee myös vastaavaa looppia seuraavassa funktiossa.
   const table = {}
-  for (blog of blogs) {
+  for (let blog of blogs) {
     if (blog.author in table) {
       table[blog.author] += 1
     } else {
@@ -45,10 +45,10 @@ const mostBlogs = (blogs) => {
   // joten en edes yritä.
   let result = {}
   let max = 0
-  for (author in table) {
+  for (let author in table) {
     if (table[author] > max) {
       max = table[author]
-      result = { 'author': author, 'blogs': table[author]}
+      result = { 'author': author, 'blogs': table[author] }
     }
   }
 
@@ -64,7 +64,7 @@ const mostLikes = (blogs) => {
 
   const table = {}
 
-  for (blog of blogs) {
+  for (let blog of blogs) {
     if (blog.author in table) {
       table[blog.author] += blog.likes
     } else {
@@ -75,10 +75,10 @@ const mostLikes = (blogs) => {
 
   let result = {}
   let max = -1
-  for (author in table) {
+  for (let author in table) {
     if (table[author] > max) {
       max = table[author]
-      result = { 'author': author, 'likes': table[author]}
+      result = { 'author': author, 'likes': table[author] }
     }
   }
 
