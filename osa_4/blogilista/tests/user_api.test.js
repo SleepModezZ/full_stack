@@ -31,7 +31,7 @@ describe('when there is initially some users saved', () => {
   })
 
   describe('viewing a specific user', () => {
-  
+
     test('the first user is hellas', async () => {
       const response = await api.get('/api/users')
 
@@ -53,7 +53,7 @@ describe('when there is initially some users saved', () => {
         .get(`/api/users/${userToView.id}`)
         .expect(200)
         .expect('Content-Type', /application\/json/)
-      
+
       const processedUserToView = JSON.parse(JSON.stringify(userToView))
 
       expect(resultUser.body).toEqual(processedUserToView)
@@ -65,9 +65,9 @@ describe('when there is initially some users saved', () => {
 
     test('a valid user can be added ', async () => {
       const newUser =   {
-        "username": "testi",
-        "name": "Testi Testinen",
-        "password": "testitesti"
+        'username': 'testi',
+        'name': 'Testi Testinen',
+        'password': 'testitesti'
       }
 
       await api
@@ -89,9 +89,9 @@ describe('when there is initially some users saved', () => {
 
     test('user with too short (less than 3 characters) username is not added', async () => {
       const newUser =   {
-        "username": "te",
-        "name": "Testi Testinen",
-        "password": "testitesti"
+        'username': 'te',
+        'name': 'Testi Testinen',
+        'password': 'testitesti'
       }
 
       await api
@@ -103,12 +103,12 @@ describe('when there is initially some users saved', () => {
 
       expect(response.body).toHaveLength(helper.initialUsers.length)
     })
-  
+
     test('user with too short (less than 3 characters) password is not added', async () => {
       const newUser =   {
-        "username": "testi",
-        "name": "Testi Testinen",
-        "password": "te"
+        'username': 'testi',
+        'name': 'Testi Testinen',
+        'password': 'te'
       }
 
       await api
@@ -120,12 +120,12 @@ describe('when there is initially some users saved', () => {
 
       expect(response.body).toHaveLength(helper.initialUsers.length)
     })
-  
+
     test('user with a username that already exists in database is not added', async () => {
       const newUser =   {
-        "username": "hellas",
-        "name": "Testi Testinen",
-        "password": "testi"
+        'username': 'hellas',
+        'name': 'Testi Testinen',
+        'password': 'testi'
       }
 
       await api

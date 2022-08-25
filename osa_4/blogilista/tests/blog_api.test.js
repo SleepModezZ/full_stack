@@ -9,7 +9,7 @@ const api = supertest(app)
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
-let loginToken = "" //Globaalimuuttuja heh heh
+let loginToken = '' //Globaalimuuttuja heh heh
 
 
 beforeEach(async () => {
@@ -29,7 +29,7 @@ beforeEach(async () => {
 
   // Autentikointi:
   let info = await api.post('/api/login')
-        .send({ "username": "root", "password": "sekret"})
+    .send({ 'username': 'root', 'password': 'sekret' })
   loginToken = 'Bearer ' + info.body.token
 
 })
@@ -84,9 +84,9 @@ describe('when there is initially some blogs saved', () => {
 
     test('a valid blog can be added ', async () => {
       const newBlog =   {
-        title: "Type wars",
-        author: "Robert C. Martin",
-        url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
+        title: 'Type wars',
+        author: 'Robert C. Martin',
+        url: 'http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html',
         likes: 2,
       }
 
@@ -108,10 +108,10 @@ describe('when there is initially some blogs saved', () => {
     })
 
     test('when not specified, likes should be set to 0', async () => {
-        const newBlog =   {
-        title: "Type wars",
-        author: "Robert C. Martin",
-        url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
+      const newBlog =   {
+        title: 'Type wars',
+        author: 'Robert C. Martin',
+        url: 'http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html',
       }
 
       await api
@@ -129,8 +129,8 @@ describe('when there is initially some blogs saved', () => {
     })
 
     test('blog without title and url is not added', async () => {
-        const newBlog =   {
-        author: "Robert C. Martin",
+      const newBlog =   {
+        author: 'Robert C. Martin',
         likes: 1000
       }
 
@@ -147,9 +147,9 @@ describe('when there is initially some blogs saved', () => {
 
     test('unauthorized user cannot add a blog', async () => {
       const newBlog =   {
-        title: "Type wars",
-        author: "Robert C. Martin",
-        url: "http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html",
+        title: 'Type wars',
+        author: 'Robert C. Martin',
+        url: 'http://blog.cleancoder.com/uncle-bob/2016/05/01/TypeWars.html',
         likes: 2,
       }
 
@@ -216,8 +216,8 @@ describe('when there is initially some blogs saved', () => {
 
       // kirjaudutaan:
       let returned = await api.post('/api/login')
-        .send({ "username": "new_user", "password": "sekret2"}).expect(200)
-      newLoginToken = 'Bearer ' + returned.body.token
+        .send({ 'username': 'new_user', 'password': 'sekret2' }).expect(200)
+      const newLoginToken = 'Bearer ' + returned.body.token
 
       const blogsAtStart = await helper.blogsInDb()
       const blogToDelete = blogsAtStart[0]
@@ -293,7 +293,7 @@ describe('when there is initially some blogs saved', () => {
       expect(result.body.likes).toEqual(oldLikes)
     })
 
-    test('cannot update other user\s postings', async () => {
+    test('cannot update other user\'s postings', async () => {
 
       const passwordHash = await bcrypt.hash('sekret2', 10)
       const user = new User({ username: 'new_user', passwordHash })
@@ -301,8 +301,8 @@ describe('when there is initially some blogs saved', () => {
 
       // kirjaudutaan:
       let returned = await api.post('/api/login')
-        .send({ "username": "new_user", "password": "sekret2"}).expect(200)
-      newLoginToken = 'Bearer ' + returned.body.token
+        .send({ 'username': 'new_user', 'password': 'sekret2' }).expect(200)
+      const newLoginToken = 'Bearer ' + returned.body.token
 
       const blogsAtStart = await helper.blogsInDb()
       const blogToUpdate = blogsAtStart[0]
