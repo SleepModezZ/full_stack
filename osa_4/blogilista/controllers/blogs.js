@@ -36,9 +36,9 @@ blogsRouter.post('/', middleware.userExtractor, async (request, response) => {
     const savedBlog = await blog.save()
     user.blogs = user.blogs.concat(savedBlog._id)
     await user.save()
-    response.status(201).json(savedBlog)
+    response.status(201).json(blog)
   } else {
-    response.status(400).send()
+    response.status(400).json({ error: 'blog must have title and url' })
   }
 
 })
@@ -57,7 +57,7 @@ blogsRouter.delete('/:id', middleware.userExtractor, async (request, response) =
 })
 
 // Tehtävissä ei nähdäkseni vaadittu oikeuksien tarkistuksia, mutta lisäsin ne tähänkin:
-blogsRouter.put('/:id', middleware.userExtractor, async (request, response, next) => {
+blogsRouter.put('/:id', middleware.userExtractor, async (request, response) => {
   const body = request.body
   const user = request.user
   const blog = await Blog.findById(request.params.id)
@@ -73,11 +73,8 @@ blogsRouter.put('/:id', middleware.userExtractor, async (request, response, next
   }
 
   // Laitoin onnistuneen päivittämisen status-koodiksi 200:
-  Blog.findByIdAndUpdate(request.params.id, updatedBlog, { new: true })
-    .then(update => {
-      response.status(200).json(update)
-    })
-    .catch(error => next(error))
+  const update = await Blog.findByIdAndUpdate(request.params.id, updatedBlog, { new: true })
+  return response.status(200).json(update)
 })
 
 

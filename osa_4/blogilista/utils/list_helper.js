@@ -3,7 +3,8 @@ const dummy = () => {
 }
 
 const totalLikes = (blogs) => {
-  return blogs.reduce((sum, blog) => sum + blog.likes, 0)
+  const likes = blogs.reduce((sum, blog) => sum + blog.likes, 0)
+  return likes
 }
 
 const favoriteBlog = (blogs) => {
@@ -14,7 +15,11 @@ const favoriteBlog = (blogs) => {
 
   const favorite = blogs.reduce((prev, blog) => blog.likes > prev.likes ? blog : prev, blogs[0])
 
-  const { _id, url, __v, ...result } = favorite //linteri herjaa, en välitä
+  // Linteri ilmoittaa virheestä "'_id' is assigned a value but never used  no-unused-vars"
+  // Jätän kuitenkin tässä ja vastaavissa kohdissa linterin huomioimatta, koska
+  // näillä muuttujilla on tässä välttämätön tehtävä, vaikka niiden arvoa ei
+  // ei koskaan käytetäkään.
+  const { _id, url, __v, ...result } = favorite
   return result
 }
 

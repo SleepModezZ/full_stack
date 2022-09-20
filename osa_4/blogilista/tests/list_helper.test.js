@@ -102,10 +102,7 @@ describe('favorite blog', () => {
 
     const randomBlog = blogs[Math.floor(Math.random() * blogs.length)]
 
-    // Linteri herjaa tästä ja vastaavista mm. '_id' is assigned a value but never used. (no-unused-vars)
-    // Muuttujien nimeämisellä on kuitenkin tässä tapauksessa merkitystä, enkä näin ollen voi
-    // korjata kohtia linteriä tyydyttämään...
-    const { _id, url, __v, ...copy } = randomBlog
+    const { _id, url, __v, ...copy } =randomBlog
 
 
     const result = listHelper.favoriteBlog([randomBlog])

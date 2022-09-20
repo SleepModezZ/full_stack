@@ -9,13 +9,13 @@ const api = supertest(app)
 const Blog = require('../models/blog')
 const User = require('../models/user')
 
-let loginToken = '' //Globaalimuuttuja heh heh
+let loginToken = ''
 
 
 beforeEach(async () => {
   await User.deleteMany({})
   const passwordHash = await bcrypt.hash('sekret', 10)
-  const user = new User({ username: 'root', passwordHash })
+  const user = new User({ username: 'root', name: 'root', passwordHash })
   await Blog.deleteMany({})
   let blogObject = new Blog(helper.initialBlogs[0])
   blogObject.user = user.id
@@ -24,8 +24,8 @@ beforeEach(async () => {
   blogObject = new Blog(helper.initialBlogs[1])
   blogObject.user = user.id
   user.blogs = user.blogs.concat(blogObject._id)
-  await blogObject.save()
   await user.save()
+  await blogObject.save()
 
   // Autentikointi:
   let info = await api.post('/api/login')

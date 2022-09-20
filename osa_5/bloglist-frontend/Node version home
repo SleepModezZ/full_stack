@@ -1,0 +1,25 @@
+Toimii kotona:
+node -v: v18.4.0
+npm -v:  8.16.0
+
+Ei toimi työtoiminnassa:
+v18.3.0
+8.11.0
+
+Koneen noden päivitys viimeisimpään versioon (latest) korjasi asian.
+
+Virheilmoitus:
+manageri@xubuntu-celsius ~/A/f/o/bloglist-frontend> npm start
+
+> frontend@0.1.0 start
+> react-scripts start
+
+Invalid options object. Dev Server has been initialized using an options object that does not match the API schema.
+ - options.allowedHosts[0] should be a non-empty string.
+npm
+
+Aikaa tuhlaantui jonkin verran siiihen, että en ymmärtänyt testauksen getByText antavan virheen myös silloin kun se löytää useamman kuin yhden osuman - rtfm!. getAllByText:in (joka ei heitä virhettä useamman osuman khdalla) kokeilu selvitti minulle asian. Ongelman paikallistamista haittasi myös se, että kumpikaan edellä mainituista metodeista ei toiminyt kun käytin tavallista tekstijonoa. En tiedä ongelman syytä, mutta ilmeisesti samaa on ilmennyt muillakin ja ratkaisu on käyttää tekstijonon sijaan säännöllisiä lausekkeita (regular expressions). Niitä käyttämällä metodit toimivat kuten niiden kuuluu.
+
+Tehtävän 5.11 proptypet lisäsin componenttiin Loginform, koska en käytä sovelluksessani Toggable componenttia. 
+
+Aikaa tuhlaantui myös siihen, että luulin hajottaneeni ohjelmani kun tykkääminen ei eräänä aamuna enää onnistunutkaan, vaikka se oli toiminut aikaisemmin. Melkein puolen tunnin debuggaamisen jälkeen koitin vain logata käyttäjän ulos ja takaisin sisään - se korjasi ongelman. Käyttäjä oli kyllä frontendin mukaan kirjautunut sisään, mutta jostain syysta backendin vastaanottama request.user oli null. Sovellus käyttää window.localStoragea käyttäjän muistamiseksi, mutta sekin on toiminut aina muulloin hyvin. En siis tiedä mistä tämä frontendin ja backendin välinen kommunikaatio-ongelma johtui, mutta nyt muistan, että odottamattomien vikojen ilmaannuttua kokeilen aina ensin logata käyttäjän ulos ja takaisin sisään ennen kun ryhdyn debuggaamaan sovellusta.
