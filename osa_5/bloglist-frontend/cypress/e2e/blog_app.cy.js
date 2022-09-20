@@ -85,7 +85,7 @@ describe('Blog ', function() {
       //
     })
 
-    it.only('blogs are ordered by likes', function() {
+    it('blogs are ordered by likes', function() {
       cy.contains('new blog').click()
       cy.get('#title').type('First')
       cy.get('#author').type('Anon.')

@@ -15,7 +15,7 @@ const Blog = ({ user, blog, blogs, setBlogs, setErrorMessage, setConfirmationMes
   // kertomaan tuleeko käyttäjälle näyttää nappi postauksen poistamiseksi.
   // Se siis näytetään vain jos postauksen tehnyt on sama kuin nyt kirjautunut käyttäjä.
   // Syystä tai toisesta tämä on ehkä eniten testauksessa ongelmia tuottanut kohta...
-  let authorized = user.username === blog.user.username ? true : false
+  const authorized = user.username === blog.user.username || !blog.user.username ? true : false
 
   // Cypress testaus ei jostain syystä vastaanota arvoa blog.user.username, vaikka
   // selaimessa se toimii. Sen seuraksena blogin poistaminen ei onnistu, koska
@@ -26,9 +26,6 @@ const Blog = ({ user, blog, blogs, setBlogs, setErrorMessage, setConfirmationMes
   // ja backend jokatapauksessa estää autorisoimattomat poistot. Olisi tietenkin
   // parempi selvittää varsinainen ongelma, mutta en onnistunut siinä, vaikka
   // käytin yli tunnin asian selvittelyyn.
-  if (!blog.user.username) {
-    authorized = true
-  }
 
   const blogStyle = {
     paddingTop: 10,
