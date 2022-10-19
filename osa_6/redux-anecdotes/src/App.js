@@ -11,8 +11,6 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    //console.log(initializeAnecdotes)
-    //console.log(initializeAnecdotes())
     dispatch(initializeAnecdotes())
   }, [dispatch])
 

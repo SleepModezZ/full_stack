@@ -7,11 +7,7 @@ const getAll = async () => {
   return response.data
 }
 
-// Nimesin tämän aluksi 'get', mutta kun editorin syntaksivärjäys
-// väritti sen toisella värillä kuin muut muuttujat päätin tarkistaa,
-// onko kyseessä Javascriptin avainsana - ja onhan se. Siitä huolimatta
-// ohjelma toimi, mutta päätin kuitenkin muuttaa muuttujan nimen:
-const getOne = async (id) => {
+const get = async (id) => {
   const response = await axios.get(baseUrl + '/' + id)
   return response.data
 }
@@ -28,4 +24,4 @@ const update = async (object) => {
   return response.data
 }
 
-export default { getOne, getAll, createNew, update }
+export default { get, getAll, createNew, update }
